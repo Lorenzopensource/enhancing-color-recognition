@@ -4,7 +4,7 @@ from recolor import recolor
 
 def main():
     # Load the image
-    img = np.array(Image.open('examples/original.png'))
+    img = np.array(Image.open('examples/original.png')) #Load your image in RGB format
 
     # Define your binary mask
     mask = np.ones(img.shape[:2], dtype=np.uint8)  # Example: full mask
@@ -14,7 +14,7 @@ def main():
     target_color = 'red' 
 
 
-    result = recolor(img, mask, original_color, target_color)
+    result = recolor(img, mask, original_color, target_color) #The output image is in RGB format
 
     # Save the result
     result_image = Image.fromarray(result)

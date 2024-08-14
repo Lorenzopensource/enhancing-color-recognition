@@ -5,19 +5,22 @@ Object recoloring is an open task and it is usually achieved trough a machine vi
 In this project I used just pre-processing techniques, starting from an image and the segmentation mask of the object I want to recolor.
 
 ## How to use
-```
-recolor(image, mask, original_color, target_color):
- # Pre-processing algorithm
- return colored_image
-```
 
-The recoloring function takes as input:
-1. An image in **RGB format**
-2. A segmentation mask of the object to recolor
-3. The original color of the object
-4. The color I want the recolored image to be
+1. Install the repo
+2. On your terminal, create a virtual environment and run:
 
-The output is the recolored image in **RGB format**.
+```
+pip install -r requirements.txt
+```
+3. Modify **main.py** file, loading your data
+
+4. Run main.py
+
+
+Remember that:
+
+- The input image should be in RGB format
+- The output image is in RGB format
 
 
 ## Limits
