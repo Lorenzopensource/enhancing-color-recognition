@@ -1,6 +1,6 @@
 from PIL import Image
 import numpy as np
-from recolor import recolor
+from recoloring_functions import recolor
 
 def main():
     # Load the image

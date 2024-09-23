@@ -1,3 +1,15 @@
 numpy
+pillow
+
+# Data visualization
+matplotlib
+
+
+# Jupyter Notebook support
+jupyter
+notebook
+jupyterlab
+
+# Other utilities
+requests
 opencv-python
-Pillow
