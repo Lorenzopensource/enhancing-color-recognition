@@ -1,5 +1,11 @@
+# Basic packages
 numpy
+pandas
+scipy
+tensorflow
 pillow
+spacy 
+inflect
 
 # Data visualization
 matplotlib
@@ -13,3 +19,4 @@ jupyterlab
 # Other utilities
 requests
 opencv-python
+
