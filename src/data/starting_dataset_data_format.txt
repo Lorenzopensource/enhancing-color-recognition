@@ -1,0 +1,24 @@
+The metadata of an image should be stored as follows:
+
+{
+    "image_id": 12345,
+    "captions": [
+        "A group of people riding bicycles."
+    ],
+    "entities": {
+        "person": [
+            [[x1, y1, x2, y2, ...], [...]],  # First instance of 'person'
+            [[x3, y3, x4, y4, ...], [...]]   # Second instance of 'person'
+        ],
+        "bicycle": [
+            [[x1, y1, x2, y2, ...]]  # Segmentation mask for 'bicycle'
+        ]
+    }
+}
+
+The name of the file should be:
+
+{name of the dataset}_{name of the set}_{image id on the dataset}
+
+If you consider to recolor your dataset please make sure to write the pre-processing code necessary to transform your dataset as presented.
+Remember to store the images into synthetic_dataset_from_object_recoloring/src/images and the metadata into synthetic_dataset_from_object_recoloring/src/images_data in the right format.
