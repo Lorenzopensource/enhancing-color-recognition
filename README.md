@@ -119,8 +119,8 @@ enhancing-color-recognition/
 │   ├── groundingdino/          # Main GroundingDINO code
 │   ├── weights/                # Folder containing GroundingDINO model weights
 │   │   └── groundingdino_tiny.pth
-│   ├── setup.py                # Setup script for installation
-│   └── ...                     # Other files in GroundingDINO repository
+│   ├── setup.py               
+│   └── ...                    
 ├── segment-anything/
 │   ├── sam/                    # Main Segment Anything code
 │   ├── weights/                # Folder containing SAM model weights
@@ -145,7 +145,7 @@ rm -rf segment-anything/segment-anything/
 
 Your directory should now look like:
 
-```arduino
+```graphql
 enhancing-color-recognition/
 ├── GroundingDINO/
 │   ├── groundingdino/
@@ -170,9 +170,13 @@ cd ../
 ```
 
 ##  🏋️ Usage
-After completing the installation and fine-tuning steps, you can utilize the enhanced CLIP model for various color recognition tasks. Detailed usage instructions and examples can be found in the scripts/ directory.
+
+After completing the installation, you can utilize the scripts of this repo to generate a synthetic dataset of chromatic variants from any dataset containing **images**, **textual descriptions**, and **segmentation masks**. You can then use the synthetic images and descriptions to run a fine-tuning of the model CLIP using a **contrastive approach**.
+
+Detailed usage instructions and examples can be found in the scripts/ directory.
 
 ### 🔄 Generating Synthetic Datasets
+![Overview of the object recoloring pipeline](object_recoloring.png)
 To generate a synthetic dataset of chromatic variants:
 
 1. Set Specifics:
@@ -186,6 +190,7 @@ python scripts/synthetic_dataset_generation.py
 ```
 
 ### 🏋️ Fine-Tuning the Model
+![Overview of the fine-tuning apporach](fine-tuning.png)
 Configure the necessary parameters and execute the fine-tuning script.
 
 1. Set Specifics:
