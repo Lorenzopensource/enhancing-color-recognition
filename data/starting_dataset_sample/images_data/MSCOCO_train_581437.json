@@ -1,0 +1,52 @@
+{
+    "image_id": 581437,
+    "captions": [
+        "A close-up of a microwave and a street cone on the driveway.",
+        "A white microwave in front of a cone.",
+        "A microwave and a cone on asphalt by bushes.",
+        "A small microwave oven sits near a caution cone.",
+        "Orange cone and microwave sitting at the curb."
+    ],
+    "entities": {
+        "microwave": [
+            [
+                [
+                    243.78,
+                    253.48,
+                    235.15,
+                    248.09,
+                    230.83,
+                    226.52,
+                    227.6,
+                    198.47,
+                    239.46,
+                    180.13,
+                    255.64,
+                    176.9,
+                    296.63,
+                    174.74,
+                    326.83,
+                    171.51,
+                    339.78,
+                    188.76,
+                    340.85,
+                    197.39,
+                    340.85,
+                    207.1,
+                    340.85,
+                    227.6,
+                    340.85,
+                    237.3,
+                    322.52,
+                    244.85,
+                    299.87,
+                    251.33,
+                    256.72,
+                    263.19,
+                    247.01,
+                    262.11
+                ]
+            ]
+        ]
+    }
+}

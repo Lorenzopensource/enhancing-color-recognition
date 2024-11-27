@@ -1,61 +1,221 @@
-# Object recoloring using a mask segmentation and pre-processing techniques
-## Overview
-Object recoloring is an open task and it is usually achieved trough a machine vision algorithm.
+# 🎨 Enhancing Color Recognition: A Pipeline to Make Visual-Text Models More Sensitive to Colors
 
-In this project I used just pre-processing techniques, starting from an image and the segmentation mask of the object I want to recolor.
+## 📄 Abstract
 
-## How to use
+Recent developments and the growing proliferation of Vision-Language Models (VLMs) have led to significant advancements in the field of computer vision. Numerous state-of-the-art models achieve performance comparable to human levels on traditional datasets; however, they still exhibit limited sensitivity to specific image attributes, such as spatial relationships between objects and chromatic characteristics, occasionally making gross errors on tasks that are intuitive for humans. In this work, we propose a pipeline to enhance the color recognition capabilities of one of the most renowned and widely used models in computer vision: CLIP (Contrastive Language–Image Pre-training). The proposed methodology involves generating a synthetic dataset composed of chromatic variants of segmented objects, derived from images and annotations from the MSCOCO dataset. The fine-tuning algorithm employed is based on a contrastive learning approach.
 
-1. Install the repo
-2. On your terminal, create a virtual environment and run:
+## 🛠️ Installation Guide
 
+This section provides detailed instructions for setting up the project environment on **macOS**, **Windows**, and **Linux**. Follow the steps corresponding to your operating system to ensure a smooth installation process.
+
+### 📝 Prerequisites
+
+- **Python 3.12**: Ensure that Python 3.12 is installed on your system. You can download it from the [official website](https://www.python.org/downloads/).
+- **Conda (Optional)**: While Conda is not strictly required, it is recommended for managing dependencies and environments efficiently. You can download Conda from the [official website](https://docs.conda.io/en/latest/miniconda.html).
+
+### 1. Clone the Repository
+
+Begin by cloning the repository to your local machine:
+
+```bash
+git clone https://github.com/Lorenzopensource/enhancing-color-recognition.git
+cd enhancing-color-recognition
 ```
+
+### 2. Create a Virtual Environment
+
+1. Creating a virtual environment ensures that project dependencies are isolated from other projects on your system.
+
+Using venv (Cross-Platform)
+
+```bash
+python3.12 -m venv venv
+```
+
+2. Activate the virtual environment:
+
+- macOs and Linux:
+```bash
+source venv/bin/activate
+```
+
+- Windows:
+```bash
+venv/Scripts/activate
+```
+
+After activation, your terminal prompt should resemble:
+
+```ruby
+(venv) user@machine:~/path/to/enhancing-color-recognition$
+```
+
+### 3. Install Dependencies
+
+With the virtual environment activated, install the required Python packages:
+
+```bash
+pip install --upgrade pip
 pip install -r requirements.txt
 ```
-3. Modify **main.py** file, loading your data
 
-4. Run main.py
+### 4. Install GroundingDINO and SAM Models
 
+The project relies on GroundingDINO and Segment Anything Models (SAM) for image segmentation and grounding tasks.
 
-Remember that:
+#### GroundingDINO
+1. Clone the GroundingDINO Repository:
 
-- The input image should be in RGB format
-- The output image is in RGB format
+```bash
+git clone https://github.com/IDEA-Research/GroundingDINO.git
+cd GroundingDINO
+```
 
+2. Install GroundingDINO:
 
-## Limits
-1. The algorithm does not currently takes in account multiple color objects. The segmentation mask should contain a **single color object**.
-2. Results with darker colors, in a dark environment, for an object having a complex texture are currently poor
+```bash
+pip install -e .
+```
 
-## Purpose
-This task is part of a bigger project which final purpose is to make the ai systems more responsive to color attribute information.
+3. Download GroundingDINO Weights:
 
-Briefly, the object recoloring algorithm is used on a subset (big as possible) of MS COCO dataset and for each example are generated #n color variations (#n = number of colors studied). Each color variation of an image is correlated to a variation of the corrispondent caption. The syntethic dataset generated is then used to train an ai system to distanciate the latent rapresentation of images with a different color of the caption, and to minimize the distance between the image and the right color caption.
+```bash
+wget https://github.com/IDEA-Research/GroundingDINO/releases/download/tiny/groundingdino_tiny.pth -P weights/
+```
 
-More accurate explanation will be provided in an external link.
+4. Return to the Main Directory:
 
+```bash
+cd ../
+```
 
-## Recolored examples
+#### Segment Anything Model (SAM)
+1. Clone the Segment Anything Repository:
 
-Original:
+```bash
+git clone https://github.com/facebookresearch/segment-anything.git
+cd segment-anything
+```
 
-![Original](examples/original.png)
+2. Install SAM:
 
-Recolored:
+```bash
+pip install -e .
+```
 
-![Recolored to green](examples/green.png)
-![Recolored to red](examples/red.png)
-![Recolored to yellow](examples/yellow.png)
-![Recolored to purple](examples/purple.png)
-![Recolored to brown](examples/brown.png)
+3. Download SAM Weights:
 
+```bash
+wget https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth -P weights/
+```
 
-## References
-Starting Paper:  https://openreview.net/pdf?id=EZYvU2oC6J
+4. Organize the Directory Structure:
 
-Vimp Group: http://vimp.math.unipd.it/publications.html#
+After installation, ensure your project directory resembles the following structure:
 
+```graphql
+enhancing-color-recognition/
+├── GroundingDINO/
+│   ├── groundingdino/          # Main GroundingDINO code
+│   ├── weights/                # Folder containing GroundingDINO model weights
+│   │   └── groundingdino_tiny.pth
+│   ├── setup.py                # Setup script for installation
+│   └── ...                     # Other files in GroundingDINO repository
+├── segment-anything/
+│   ├── sam/                    # Main Segment Anything code
+│   ├── weights/                # Folder containing SAM model weights
+│   │   └── sam_vit_h_4b8939.pth
+│   ├── segment-anything/
+│   │   └── ...
+│   ├── setup.py                
+│   └── ...                     
+├── scripts/                              
+│   └── ... 
+```   
 
-## 
+Reorganize the segment-anything Directory:
 
-This project is done thanks to the collaboration of the Unipd VIMP Group
+Move the segment_anything and weights directories out of the nested segment-anything/segment-anything/ directory to the root segment-anything/ directory and delete the nested folder:
+
+```bash
+mv segment-anything/segment-anything/segment_anything segment-anything/
+mv segment-anything/segment-anything/weights segment-anything/
+rm -rf segment-anything/segment-anything/
+```
+
+Your directory should now look like:
+
+```arduino
+enhancing-color-recognition/
+├── GroundingDINO/
+│   ├── groundingdino/
+│   ├── weights/
+│   │   └── groundingdino_tiny.pth
+│   ├── setup.py
+│   └── ...
+├── segment-anything/
+│   ├── sam/
+│   ├── weights/
+│   │   └── sam_vit_h_4b8939.pth
+│   ├── setup.py                
+│   └── ...                     
+├── scripts/                              
+│   └── ...
+```
+
+Return to the Main Directory:
+
+```bash
+cd ../
+```
+
+##  🏋️ Usage
+After completing the installation and fine-tuning steps, you can utilize the enhanced CLIP model for various color recognition tasks. Detailed usage instructions and examples can be found in the scripts/ directory.
+
+### 🔄 Generating Synthetic Datasets
+To generate a synthetic dataset of chromatic variants:
+
+1. Set Specifics:
+
+Adjust the configuration parameters in the scripts/synthetic_dataset_generation.py file as needed to suit your specific requirements.
+
+2. Run the Script:
+
+```bash
+python scripts/synthetic_dataset_generation.py
+```
+
+### 🏋️ Fine-Tuning the Model
+Configure the necessary parameters and execute the fine-tuning script.
+
+1. Set Specifics:
+
+Adjust the configuration parameters in the scripts/fine-tuning.py file as needed to suit your specific requirements.
+
+2. Run the Fine-Tuning Script:
+
+```bash
+python scripts/fine-tuning.py
+```
+
+## 📞 Contact
+For further assistance, please contact lorenzo.pasqualotto01@gmail.com.
+
+*This project was developed as part of a thesis at the University of Padua (Unipd) during the academic year 2023-2024.*
+---
+
+## Table of Contents
+
+1. [📄 Abstract]((#-abstract))
+2. [🛠️ Installation Guide](#-installation-guide)
+   - [📝 Prerequisites](#-prerequisites)
+   - [1. Clone the Repository](#1-clone-the-repository)
+   - [2. Create a Virtual Environment](#2-create-a-virtual-environment)
+   - [3. Install Dependencies](#3-install-dependencies)
+   - [4. Install GroundingDINO and SAM Models](#4-install-groundingdino-and-sam-models)
+3. [🏋️ Usage](#-usage)
+   - [🔄 Generating Synthetic Datasets](#-generating-synthetic-datasets)
+   - [🏋️ Fine-Tuning the Model](#-fine-tuning-the-model)
+4. [📞 Contact](#-contact)
+5. [📚 References](#-references)
+

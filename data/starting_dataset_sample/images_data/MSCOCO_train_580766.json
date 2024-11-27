@@ -1,0 +1,72 @@
+{
+    "image_id": 580766,
+    "captions": [
+        "A yellow flowers stands in a small blue vase. ",
+        "A pitiful looking dandelion in an antique looking vase.",
+        "A blue vase filled with water and a yellow flower.",
+        "A small blue vase containing a single flower.",
+        "A sole yellow flower emerges from a blue vase."
+    ],
+    "entities": {
+        "vase": [
+            [
+                [
+                    315.55,
+                    256.93,
+                    311.46,
+                    244.17,
+                    312.48,
+                    237.54,
+                    317.59,
+                    230.91,
+                    324.73,
+                    227.33,
+                    336.47,
+                    224.78,
+                    347.69,
+                    225.29,
+                    351.26,
+                    225.8,
+                    357.38,
+                    230.91,
+                    366.06,
+                    238.56,
+                    366.06,
+                    245.19,
+                    359.43,
+                    256.42,
+                    356.87,
+                    291.11,
+                    393.61,
+                    311.01,
+                    416.06,
+                    342.65,
+                    415.04,
+                    376.32,
+                    386.47,
+                    449.29,
+                    383.41,
+                    455.41,
+                    341.06,
+                    463.06,
+                    293.1,
+                    459.49,
+                    261.46,
+                    374.79,
+                    261.46,
+                    349.79,
+                    267.58,
+                    332.44,
+                    280.34,
+                    320.71,
+                    299.22,
+                    306.93,
+                    319.12,
+                    292.64,
+                    319.12,
+                    272.75
+                ]
+            ]
+        ]
+    }
+}

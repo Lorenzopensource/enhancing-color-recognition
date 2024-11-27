@@ -1,0 +1,68 @@
+{
+    "image_id": 580951,
+    "captions": [
+        "A body of water with an elephant in the background.",
+        "an elephant is standing in some tall grass by some water",
+        "The elephant stands in the grass near the water.",
+        "A large gray elephant is standing in grass next to a river.",
+        "An elephant and its large ears reflected in water"
+    ],
+    "entities": {
+        "elephant": [
+            [
+                [
+                    131.5,
+                    29.87,
+                    140.41,
+                    39.67,
+                    171.59,
+                    43.23,
+                    207.22,
+                    36.1,
+                    237.51,
+                    45.01,
+                    261.56,
+                    65.5,
+                    261.56,
+                    65.5,
+                    282.05,
+                    61.94,
+                    314.12,
+                    79.75,
+                    342.63,
+                    117.17,
+                    352.42,
+                    149.24,
+                    346.19,
+                    155.47,
+                    321.25,
+                    158.15,
+                    322.14,
+                    177.74,
+                    276.7,
+                    147.46,
+                    275.81,
+                    190.21,
+                    209.89,
+                    187.54,
+                    165.35,
+                    170.62,
+                    139.52,
+                    195.56,
+                    126.15,
+                    193.78,
+                    121.7,
+                    145.67,
+                    55.78,
+                    88.66,
+                    55.78,
+                    62.83,
+                    85.18,
+                    36.99,
+                    124.37,
+                    30.76
+                ]
+            ]
+        ]
+    }
+}

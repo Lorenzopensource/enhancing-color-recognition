@@ -1,0 +1,9 @@
+{
+    "original_color": "yellow", 
+    "captions": { "red": "A red car on the street.",
+                  "blue": "A blue car on the street.", 
+                  "green": "A green car on the street.", 
+                  "yellow": "A yellow car on the street." 
+                  ...
+                } 
+}
