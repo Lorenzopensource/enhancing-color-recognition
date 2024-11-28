@@ -57,9 +57,10 @@ With the virtual environment activated, install the required Python packages:
 ```bash
 pip install --upgrade pip
 pip install -r requirements.txt
+python -m spacy download en_core_web_sm
 ```
 
-### 4. Install GroundingDINO and SAM Models
+### 4. Install GroundingDINO, SAM and the Flickr8k Dataset
 
 The project relies on GroundingDINO and Segment Anything Models (SAM) for image segmentation and grounding tasks.
 
@@ -117,17 +118,16 @@ After installation, ensure your project directory resembles the following struct
 enhancing-color-recognition/
 ├── GroundingDINO/
 │   ├── groundingdino/          # Main GroundingDINO code
-│   ├── weights/                # Folder containing GroundingDINO model weights
+│   ├── weights/                 # Folder containing GroundingDINO model weights
 │   │   └── groundingdino_tiny.pth
-│   ├── setup.py               
-│   └── ...                    
-├── segment-anything/
-│   ├── sam/                    # Main Segment Anything code
-│   ├── weights/                # Folder containing SAM model weights
+│   ├── setup.py                 
+│   └── ...                     
+├── segment-anything/           # Main Segment Anything code
+│   ├── weights/                 # Folder containing SAM model weights
 │   │   └── sam_vit_h_4b8939.pth
 │   ├── segment-anything/
 │   │   └── ...
-│   ├── setup.py                
+│   ├── predictor.py                
 │   └── ...                     
 ├── scripts/                              
 │   └── ... 
@@ -138,9 +138,9 @@ Reorganize the segment-anything Directory:
 Move the segment_anything and weights directories out of the nested segment-anything/segment-anything/ directory to the root segment-anything/ directory and delete the nested folder:
 
 ```bash
-mv segment-anything/segment-anything/segment_anything segment-anything/
-mv segment-anything/segment-anything/weights segment-anything/
-rm -rf segment-anything/segment-anything/
+mv segment-anything/segment_anything .
+mv segment-anything/weights segment_anything/
+rm -rf segment-anything
 ```
 
 Your directory should now look like:
@@ -153,11 +153,10 @@ enhancing-color-recognition/
 │   │   └── groundingdino_tiny.pth
 │   ├── setup.py
 │   └── ...
-├── segment-anything/
-│   ├── sam/
+├── segment_anything/
 │   ├── weights/
 │   │   └── sam_vit_h_4b8939.pth
-│   ├── setup.py                
+│   ├── predictor.py                
 │   └── ...                     
 ├── scripts/                              
 │   └── ...
@@ -169,14 +168,39 @@ Return to the Main Directory:
 cd ../
 ```
 
+#### Flickr8k 
+The Flickr8k dataset is required for evaluating the correlation with human judgment.
+
+1. Download the Flickr8k Dataset:
+
+Visit the Flickr8k dataset page to request access.
+Once approved, download the dataset files.
+Extract and Move the Dataset:
+
+2. Extract the downloaded dataset archive.
+
+3. Move the Flickr8k folder to the main repository directory:
+
+```graphql
+enhancing-color-recognition/
+├── Flickr8k/
+│   ├── Flickr8k_Dataset/
+│   └── Flickr8k_text/
+├── GroundingDINO/
+├── segment-anything/
+├── scripts/
+├── data/
+├── models/
+├── requirements.txt
+├── README.md
+└── ...       
+```              
+
 ##  🏋️ Usage
-
-After completing the installation, you can utilize the scripts of this repo to generate a synthetic dataset of chromatic variants from any dataset containing **images**, **textual descriptions**, and **segmentation masks**. You can then use the synthetic images and descriptions to run a fine-tuning of the model CLIP using a **contrastive approach**.
-
-Detailed usage instructions and examples can be found in the scripts/ directory.
+After completing the installation and fine-tuning steps, you can utilize the enhanced CLIP model for various color recognition tasks. Detailed usage instructions and examples can be found in the scripts/ directory.
 
 ### 🔄 Generating Synthetic Datasets
-![Overview of the object recoloring pipeline](object_recoloring.png)
+![Object Recoloring Pipeline](object_recoloring.png)
 To generate a synthetic dataset of chromatic variants:
 
 1. Set Specifics:
@@ -190,7 +214,7 @@ python scripts/synthetic_dataset_generation.py
 ```
 
 ### 🏋️ Fine-Tuning the Model
-![Overview of the fine-tuning apporach](fine-tuning.png)
+![Fine-Tuning Approach](fine-tuning.png)
 Configure the necessary parameters and execute the fine-tuning script.
 
 1. Set Specifics:
@@ -203,24 +227,44 @@ Adjust the configuration parameters in the scripts/fine-tuning.py file as needed
 python scripts/fine-tuning.py
 ```
 
+### 📊 Evaluating Model Performance
+
+After fine-tuning, evaluate the performance of your enhanced CLIP model to assess its color recognition capabilities.
+
+1. Set Specifics:
+
+Ensure that the evaluation scripts are configured correctly, especially paths to datasets and model checkpoints. You can adjust parameters in the scripts/evaluation.py file as needed.
+
+2. Run the Evaluation Script:
+
+The evaluation script allows you to choose which performance metrics to evaluate: task-specific performance, correlation with human judgments, or both.
+
+- Evaluate Both Task and Human Performance (Default):
+
+```bash
+python scripts/evaluation.py
+```
+
+
+- Evaluate Only Task Performance:
+
+```bash
+python scripts/evaluation.py --performance task
+```
+
+- Evaluate Only Human Correlation Performance:
+
+```bash
+python scripts/evaluation.py --performance human
+```
+
+3. Review the Results:
+
+After running the evaluation, the script will output performance metrics and generate a graph summarizing the results.
+
 ## 📞 Contact
 For further assistance, please contact lorenzo.pasqualotto01@gmail.com.
 
 *This project was developed as part of a thesis at the University of Padua (Unipd) during the academic year 2023-2024.*
 ---
-
-## Table of Contents
-
-1. [📄 Abstract]((#-abstract))
-2. [🛠️ Installation Guide](#-installation-guide)
-   - [📝 Prerequisites](#-prerequisites)
-   - [1. Clone the Repository](#1-clone-the-repository)
-   - [2. Create a Virtual Environment](#2-create-a-virtual-environment)
-   - [3. Install Dependencies](#3-install-dependencies)
-   - [4. Install GroundingDINO and SAM Models](#4-install-groundingdino-and-sam-models)
-3. [🏋️ Usage](#-usage)
-   - [🔄 Generating Synthetic Datasets](#-generating-synthetic-datasets)
-   - [🏋️ Fine-Tuning the Model](#-fine-tuning-the-model)
-4. [📞 Contact](#-contact)
-5. [📚 References](#-references)
 
